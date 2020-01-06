@@ -8,12 +8,11 @@ var firebase = require('firebase').initializeApp({
 
 var ref = firebase.database().ref().child('Invites');
 
-ref.on('value', function(snap) {
+ref.on('value', (snap) => {
   var text = "This is my test twillo_firebase application";
   for (var obj of Object.values(snap.val())[0]) {
     var number = obj.number.replace('us', '+1');
     sendSMS(number, text);
-    // console.log(number);
   }
 });
 
@@ -32,6 +31,5 @@ function sendSMS(cellNumber, text) {
     if(err) {
       console.error("Error : ", err.message);
     }
-    // console.log(message);
   });
 }
